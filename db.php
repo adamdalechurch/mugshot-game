@@ -1,9 +1,11 @@
 <?php
 class DB {
     private $_db;
+    private $debug;
 
-    public function __construct(){
+    public function __construct($debug = false){
         $this->connect();
+        $this->debug = $debug;
     }
 
     public function __destruct(){
@@ -26,7 +28,10 @@ class DB {
         $sql = rtrim($sql, ", ");
         $sql .= ")";
 
-        $mysqli->query($sql);        
+        $this->debug($sql);
+
+        $mysqli->query($sql);
+        return $mysqli->insert_id;       
     }
 
     public function select($table, $columns, $where){
@@ -38,7 +43,7 @@ class DB {
         $sql = rtrim($sql, ", ");
         $sql .= " FROM $table WHERE ";
         foreach ($where as $key => $value) {
-            $sql .= "$key = '$value' AND ";
+            $sql .= "$key = '".$mysqli->real_escape_string($value)."' AND ";
         }
         $sql = rtrim($sql, " AND ");
         $result = $mysqli->query($sql);
@@ -46,6 +51,9 @@ class DB {
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
+
+        $this->debug($sql);
+
         return $rows;
     }
 
@@ -58,7 +66,7 @@ class DB {
         $sql = rtrim($sql, ", ");
         $sql .= " WHERE ";
         foreach ($where as $key => $value) {
-            $sql .= "$key = '$value' AND ";
+            $sql .= "$key = '".$mysqli->real_escape_string($value)." AND ";
         }
         $sql = rtrim($sql, " AND ");
         $mysqli->query($sql);
@@ -89,6 +97,13 @@ class DB {
         
         if ($this->_db->connect_errno) {
             echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+    }
+
+    private function debug($sql){
+        if($this->debug){
+            echo $sql;
+            exit();
         }
     }
 }

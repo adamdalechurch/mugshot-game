@@ -2,7 +2,7 @@ CREATE DATABASE mugshot_game;
 
 CREATE TABLE sources (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    source_id VARCHAR(255),
+    source_id VARCHAR(255) UNIQUE NOT NULL,
     name VARCHAR(255),
     state VARCHAR(255),
     state_full VARCHAR(255),
@@ -31,8 +31,8 @@ CREATE TABLE arrests (
 );
 
 CREATE TABLE charges (
-    individual_id INT, 
-    arrest_id INT, 
+    individual_id INT NULL, 
+    arrest_id INT NULL, 
     charge VARCHAR(255),
     FOREIGN KEY (individual_id) REFERENCES individuals(id),
     FOREIGN KEY (arrest_id) REFERENCES arrests(id)

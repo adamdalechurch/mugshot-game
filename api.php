@@ -1,5 +1,6 @@
 
 <?php
+ini_set('memory_limit', '9999M'); 
 
 /* exapmle methods */
 
@@ -16,7 +17,6 @@
 */
 function fetch_sources() {
     $url = "http://www.JailBase.com/api/1/sources/";
-    // only return half the sources:
     return fetch_api_data($url);
 }
 
@@ -36,8 +36,6 @@ function fetch_sources() {
 */
 function fetch_recent_by_source_id($source_id, $page, $json_callback = null) {
     $url = "http://www.JailBase.com/api/1/recent/?source_id=" . $source_id . "&page=" . $page; 
-    echo 'das';
-    echo $url; exit;
     //($json_callback ? "&json_callback=" . $json_callback : '');
     return fetch_api_data($url);
 }

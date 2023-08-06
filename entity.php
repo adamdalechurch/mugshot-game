@@ -7,15 +7,15 @@ class Entity {
     private $_columns;
     private $_id_name;
 
-    public function __construct($columns, $table, $id_name){
-        $this->_db = new DB();
+    public function __construct($columns, $table, $id_name, $debug = false){
+        $this->_db = new DB($debug);
         $this->_table = $table;
         $this->_columns = $columns;
         $this->_id_name = $id_name;
     }
 
     public function insert($records){
-        $this->_db->insert($this->_table, $records, $this->_columns);
+       return $this->_db->insert($this->_table, $records, $this->_columns);
     }
 
     public function select($where){
