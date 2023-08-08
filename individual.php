@@ -1,18 +1,48 @@
 <?php
 include_once("entity.php");
-/*individuals:
-name - The name of the individual.
-mugshot - The image url of mugshot.
-id - A unique string id for the record.
-source_id - The id of the source.
-source - The name of the source.
-county_state - The county and state of the booking.
-book_date - Book Date string in YYYY-MM-DD format.
-book_date_formatted - Book Date string in MMM DD, YYYY format.
-more_info_url - The url on JailBase.com to get more info. */
-
 class Individual extends Entity {
-    private $cols = array("name", "mugshot", "id", "source_id", "source", "county_state", "book_date", "book_date_formatted", "more_info_url");
+    private $cols = '[
+        {
+            "name": "id",
+            "type": "INT",
+            "primary_key": true,
+            "auto_increment": true
+        },
+        {
+            "name": "name",
+            "type": "VARCHAR(255)"
+        },
+        {
+            "name": "mugshot",
+            "type": "VARCHAR(255)"
+        },
+        {
+            "name": "source_id",
+            "type": "INT",
+            "not_null": true
+        },
+        {
+            "name": "source",
+            "type": "VARCHAR(255)",
+            "not_null": true
+        },
+        {
+            "name": "county_state",
+            "type": "VARCHAR(100)"
+        },
+        {
+            "name": "book_date",
+            "type": "VARCHAR(255)"
+        },
+        {
+            "name": "book_date_formatted",
+            "type": "VARCHAR(255)"
+        },
+        {
+            "name": "more_info_url",
+            "type": "VARCHAR(255)"
+        }
+    ]';
     private $table = "individuals";
     private $id_name = "id";
 

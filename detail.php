@@ -1,15 +1,38 @@
 <?php
 include_once("entity.php");
 /*
-details:
-individual_id - The id of the individual. (nullable fk)
-arrest_id - The id of the arrest. (nullable fk)
-description - The description.
+CREATE TABLE details (
+    individual_id INT, 
+    arrest_id INT,
+    description VARCHAR(255),
+    FOREIGN KEY (individual_id) REFERENCES individuals(id),
+    FOREIGN KEY (arrest_id) REFERENCES arrests(id)
+);
 */
-
 class Detail extends Entity {
-    private $cols = array("individual_id", "arrest_id", "description");
-    private $table = "charges";
+    private $cols = '[
+        {
+            "name": "id",
+            "type": "INT",
+            "primary_key": true,
+            "auto_increment": true
+        },
+        {
+            "name": "individual_id",
+            "type": "INT",
+            "foreign_key": "individuals(id)"
+        },
+        {
+            "name": "arrest_id",
+            "type": "INT",
+            "foreign_key": "arrests(id)"
+        },
+        {
+            "name": "description",
+            "type": "VARCHAR(255)"
+        }
+    ]';
+    private $table = "details";
     private $id_name = "id";
 
     public function __construct(){

@@ -6,7 +6,6 @@ include_once 'charge.php';
 include_once 'detail.php';
 include_once 'api.php';
 
-
 function import_sources(){
     $source_repo = new Source;
     $num_imported = 0;

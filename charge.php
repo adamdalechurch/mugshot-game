@@ -1,14 +1,38 @@
 <?php
 include_once("entity.php");
 /*individuals:
-charges:
-individual_id - The id of the individual. (nullable fk)
-arrest_id - The id of the arrest. (nullable fk)
-charge - The charge.
+CREATE TABLE charges (
+    individual_id INT NULL, 
+    arrest_id INT NULL, 
+    charge VARCHAR(255),
+    FOREIGN KEY (individual_id) REFERENCES individuals(id),
+    FOREIGN KEY (arrest_id) REFERENCES arrests(id)
+);
  */
 
 class Charge extends Entity {
-    private $cols = array("individual_id", "arrest_id", "charge");
+    private $cols = '[
+        {
+            "name": "id",
+            "type": "INT",
+            "primary_key": true,
+            "auto_increment": true
+        },
+        {
+            "name": "individual_id",
+            "type": "INT",
+            "foreign_key": "individuals(id)"
+        },
+        {
+            "name": "arrest_id",
+            "type": "INT",
+            "foreign_key": "arrests(id)"
+        },
+        {
+            "name": "charge",
+            "type": "VARCHAR(255)"
+        }
+    ]';
     private $table = "charges";
     private $id_name = "id";
 
