@@ -1,0 +1,13 @@
+{
+    "name": "user/mugshot-game",
+    "description": "a game where you guess what the crime is based on the mug shot",
+    "authors": [
+        {
+            "name": "AdamChurch",
+            "email": "adamdchurch92@gmail.com"
+        }
+    ],
+    "require": {
+        "adamdchurch/simple-php": "dev-main"
+    }
+}
